@@ -31,9 +31,11 @@ export class ExpPhase extends PlayerPartyMemberPokemonPhase {
       () => {
         const lastLevel = pokemon.level;
         pokemon.addExp(exp.value);
+        pokemon.hp = pokemon.hp + Math.ceil(pokemon.getMaxHp()/6);
         const newLevel = pokemon.level;
         if (newLevel > lastLevel) {
           globalScene.unshiftPhase(new LevelUpPhase(this.partyMemberIndex, lastLevel, newLevel));
+          pokemon.hp = pokemon.hp + Math.floor(pokemon.getMaxHp()/8);
         }
         pokemon.updateInfo().then(() => this.end());
       },

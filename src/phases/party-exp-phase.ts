@@ -1,5 +1,6 @@
 import { globalScene } from "#app/global-scene";
 import { Phase } from "#app/phase";
+import { BattlePhase } from "./battle-phase";
 
 /**
  * Provides EXP to the player's party *without* doing any Pokemon defeated checks or queueing extraneous post-battle phases
@@ -25,7 +26,7 @@ export class PartyExpPhase extends Phase {
     super.start();
 
     globalScene.applyPartyExp(this.expValue, false, this.useWaveIndexMultiplier, this.pokemonParticipantIds);
-
+    pokemon.hp = pokemon.hp + (pokemon.getMaxHp()/4);
     this.end();
   }
 }

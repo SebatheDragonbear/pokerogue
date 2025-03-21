@@ -7,6 +7,7 @@ import { LearnMovePhase } from "#app/phases/learn-move-phase";
 import { PlayerPartyMemberPokemonPhase } from "#app/phases/player-party-member-pokemon-phase";
 import { LevelAchv } from "#app/system/achv";
 import { NumberHolder } from "#app/utils";
+
 import i18next from "i18next";
 
 export class LevelUpPhase extends PlayerPartyMemberPokemonPhase {
@@ -31,6 +32,9 @@ export class LevelUpPhase extends PlayerPartyMemberPokemonPhase {
     globalScene.validateAchvs(LevelAchv, new NumberHolder(this.level));
 
     const prevStats = this.pokemon.stats.slice(0);
+    
+    this.pokemon.hp = this.pokemon.hp + Math.floor(this.pokemon.getMaxHp()/4);
+
     this.pokemon.calculateStats();
     this.pokemon.updateInfo();
     if (globalScene.expParty === ExpNotification.DEFAULT) {
